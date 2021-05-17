@@ -27,7 +27,7 @@ class HomePage extends StatelessWidget {
                 Icons.business_center,
                 color: Colors.lightBlueAccent,
               ),
-              hintText: 'Your Name',
+              hintText: 'Enter your name',
               border: InputBorder.none,
             ),
           ),
