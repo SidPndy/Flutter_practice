@@ -5,10 +5,12 @@ void main() {
 }
 
 class Login extends StatelessWidget {
+  GlobalKey<FormState> formkey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Projecy1.try',
+      title: 'Project1.try',
       home: Scaffold(
         // backgroundColor: Colors.white,
         appBar: AppBar(
@@ -18,163 +20,191 @@ class Login extends StatelessWidget {
           elevation: 0, //Shadow like thing.
         ),
         body: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(height: 10),
-              Row(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.fromLTRB(33, 10, 0, 0),
-                    child: CircleAvatar(
-                      backgroundImage: AssetImage('assets/Pic.PNG'),
-                      radius: 35,
+          child: Form(
+            key: formkey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(height: 10),
+                Row(
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.fromLTRB(33, 10, 0, 0),
+                      child: CircleAvatar(
+                        backgroundImage: AssetImage('assets/Pic.PNG'),
+                        radius: 35,
+                      ),
                     ),
-                  ),
-                  SizedBox(width: 20),
-                  Text(
-                    'Siddhartha Pandey',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.blue[900],
-                      fontSize: 17,
+                    SizedBox(width: 20),
+                    Text(
+                      'Siddhartha Pandey',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.blue[900],
+                        fontSize: 17,
+                      ),
                     ),
-                  ),
-                ],
-              ),
-              Divider(
-                height: 30,
-                color: Colors.grey,
-              ),
-              Padding(
-                padding: EdgeInsets.fromLTRB(33, 0, 0, 0),
-                child: Text(
-                  'Nickname',
-                  style: TextStyle(
-                    fontSize: 13,
-                    letterSpacing: 3,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.blue[800],
-                  ),
+                  ],
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(36, 0, 20, 0),
-                child: TextFormField(
-                  /* validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Enter your name';
-                    }
-                    return null;
-                  },*/
-                  // maxLength: 30,
-                  decoration: InputDecoration(
-                    enabledBorder: InputBorder.none,
-                    hintText: 'example: Alexgender',
-                  ),
+                Divider(
+                  height: 30,
+                  color: Colors.grey,
                 ),
-              ),
-              Padding(
-                padding: EdgeInsets.fromLTRB(33, 5, 0, 0),
-                child: Text(
-                  'E-mail',
-                  style: TextStyle(
-                    fontSize: 13,
-                    letterSpacing: 3,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.blue[800],
-                  ),
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.fromLTRB(36, 0, 20, 0),
-                child: TextField(
-                  // maxLength: 30,
-                  decoration: InputDecoration(
-                    enabledBorder: InputBorder.none,
-                    hintText: 'example.Alexgender@email.com',
-                  ),
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.fromLTRB(33, 5, 0, 0),
-                child: Text(
-                  'Password',
-                  style: TextStyle(
-                    fontSize: 13,
-                    letterSpacing: 3,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.blue[800],
-                  ),
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.fromLTRB(36, 0, 20, 0),
-                child: TextField(
-                  // maxLength: 30,
-                  obscureText: true,
-                  decoration: InputDecoration(
-                    enabledBorder: InputBorder.none,
-                    hintText: 'q@5swohRd',
-                  ),
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.fromLTRB(33, 5, 0, 0),
-                child: Text(
-                  'Confirm Password',
-                  style: TextStyle(
-                    fontSize: 13,
-                    letterSpacing: 3,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.blue[800],
-                  ),
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.fromLTRB(36, 0, 20, 0),
-                child: TextField(
-                  // maxLength: 30,
-                  obscureText: true,
-                  decoration: InputDecoration(
-                    enabledBorder: InputBorder.none,
-                    hintText: 'q@5swohRd',
-                  ),
-                ),
-              ),
-              SizedBox(height: 20),
-              Center(
-                child: FloatingActionButton.extended(
-                  onPressed: () {},
-
-                  backgroundColor: Colors.blue[900],
-                  label: Text('                Sign Up                  '),
-                  //icon: Icon(Icons.login_sharp,),
-                ),
-              ),
-
-              /* Center(
-                child: RaisedButton.icon(
-                  onPressed: () {},
-                  
-                  color: Colors.blue,
-                  icon: Icon(
-                    Icons.login_rounded,
-                    color: Colors.white,
-                  ),
-                  
-                  label: Text(
-                    'Sign Up',
+                Padding(
+                  padding: EdgeInsets.fromLTRB(33, 0, 0, 0),
+                  child: Text(
+                    'Nickname',
                     style: TextStyle(
-                      fontSize: 18,
+                      fontSize: 13,
                       letterSpacing: 3,
                       fontWeight: FontWeight.bold,
-                      color: Colors.white,
+                      color: Colors.blue[800],
                     ),
                   ),
                 ),
-              ),*/
-            ],
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(36, 0, 20, 0),
+                  child: TextFormField(
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Enter your name';
+                      }
+                      if (value.length <= 3) {
+                        return 'Name must be at least of 4 characters!';
+                      } else {
+                        return null;
+                      }
+                    },
+                    // maxLength: 30,
+                    decoration: InputDecoration(
+                      enabledBorder: InputBorder.none,
+                      hintText: 'example: Alexgender',
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.fromLTRB(33, 5, 0, 0),
+                  child: Text(
+                    'E-mail',
+                    style: TextStyle(
+                      fontSize: 13,
+                      letterSpacing: 3,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.blue[800],
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.fromLTRB(36, 0, 20, 0),
+                  child: TextFormField(
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Enter e-mail';
+                      } else {
+                        return null;
+                      }
+                    },
+                    // maxLength: 30,
+                    decoration: InputDecoration(
+                      enabledBorder: InputBorder.none,
+                      hintText: 'example.Alexgender@email.com',
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.fromLTRB(33, 5, 0, 0),
+                  child: Text(
+                    'Password',
+                    style: TextStyle(
+                      fontSize: 13,
+                      letterSpacing: 3,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.blue[800],
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.fromLTRB(36, 0, 20, 0),
+                  child: TextFormField(
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Enter password';
+                      } else {
+                        return null;
+                      }
+                    },
+
+                    // maxLength: 30,
+                    obscureText: true,
+                    decoration: InputDecoration(
+                      enabledBorder: InputBorder.none,
+                      hintText: 'q@5swohRd',
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.fromLTRB(33, 5, 0, 0),
+                  child: Text(
+                    'Confirm Password',
+                    style: TextStyle(
+                      fontSize: 13,
+                      letterSpacing: 3,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.blue[800],
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.fromLTRB(36, 0, 20, 0),
+                  child: TextFormField(
+                    // maxLength: 30,
+                    obscureText: true,
+                    decoration: InputDecoration(
+                      enabledBorder: InputBorder.none,
+                      hintText: 'q@5swohRd',
+                    ),
+                  ),
+                ),
+                SizedBox(height: 20),
+                Center(
+                  child: FloatingActionButton.extended(
+                    onPressed: () {
+                      if (formkey.currentState.validate()) {
+                        return 'Valid';
+                      } else {
+                        return 'invalid';
+                      }
+                    },
+
+                    backgroundColor: Colors.blue[900],
+                    label: Text('                Sign Up                  '),
+                    //icon: Icon(Icons.login_sharp,),
+                  ),
+                ),
+
+                /* Center(
+                  child: RaisedButton.icon(
+                    onPressed: () {},
+                    
+                    color: Colors.blue,
+                    icon: Icon(
+                      Icons.login_rounded,
+                      color: Colors.white,
+                    ),
+                    
+                    label: Text(
+                      'Sign Up',
+                      style: TextStyle(
+                        fontSize: 18,
+                        letterSpacing: 3,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ),*/
+              ],
+            ),
           ),
         ),
 

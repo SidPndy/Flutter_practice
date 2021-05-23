@@ -17,6 +17,71 @@ class MyApp extends StatelessWidget {
           ),
         ),
         body: Center(
+          child: Container(
+            height: 250,
+            width: 300,
+            child: Card(
+              color: Colors.amber,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(45),
+              ),
+              elevation: 20,
+              child: Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: Column(
+                  children: [
+                    ListTile(
+                      leading: Icon(
+                        Icons.person,
+                        color: Colors.blue[900],
+                        size: 42,
+                      ),
+                      title: Text(
+                        'Siddhartha Pandey',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      subtitle: Text(
+                        'Sunwal-2, Nawalparasi',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 12,
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 30,
+                    ),
+                    ButtonBar(
+                      children: [
+                        FlatButton(
+                          onPressed: () {},
+                          color: Colors.blue[900],
+                          child: Icon(
+                            Icons.call,
+                            color: Colors.white,
+                          ),
+                        ),
+                        FlatButton(
+                          onPressed: () {},
+                          color: Colors.blue[900],
+                          child: Icon(
+                            Icons.location_on_rounded,
+                            color: Colors.white,
+                          ),
+                        )
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ),
+        /* body: Center(
           child: IconButton(
             onPressed: () {},
             icon: Icon(
@@ -24,16 +89,16 @@ class MyApp extends StatelessWidget {
               size: 30,
               color: Colors.amberAccent,
             ),
-          ),
+          ),*/
 
-          /*   child: RaisedButton.icon(         // button with icon
+        /*   child: RaisedButton.icon(         // button with icon
             onPressed: () {},
             icon: Icon(Icons.email),
             label: Text('Send'),
             color: Colors.amberAccent,
           ),       */
 
-          /* child: FlatButton(              //button without icon
+        /* child: FlatButton(              //button without icon
             onPressed: () {},
             color: Colors.purpleAccent,
             
@@ -47,15 +112,15 @@ class MyApp extends StatelessWidget {
             ),
           ),     */
 
-          /*  child: Icon(
+        /*  child: Icon(
             Icons.business_center,
             color: Colors.purple,
             size: 100,            
           ),     */
 
-          //child: Image.asset('Assets/shake.jpg'),
+        //child: Image.asset('Assets/shake.jpg'),
 
-          /*    child: Text(                          //importing font (first add in pubspec.yaml)
+        /*    child: Text(                          //importing font (first add in pubspec.yaml)
             'My program',
             style: TextStyle(
               fontFamily: 'christmas',
@@ -66,7 +131,7 @@ class MyApp extends StatelessWidget {
             ),      
           ),*/
 
-          /*  body: Container(
+        /*  body: Container(
           decoration: BoxDecoration(                              //decorating the container.
               color: Colors.purple, 
               border: Border.all(
@@ -95,18 +160,6 @@ class MyApp extends StatelessWidget {
           ),
         ),
         */
-        ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {},
-          backgroundColor: Colors.purple,
-          splashColor: Colors.black12,
-          child: Text(
-            'Click',
-            style: TextStyle(
-              color: Colors.white,
-            ),
-          ),
-        ),
       ),
     );
   }
