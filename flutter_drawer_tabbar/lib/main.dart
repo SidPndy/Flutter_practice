@@ -81,8 +81,18 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Container(
-        child: Text('This is HomePage'),
+      child: RaisedButton(
+        onPressed: () {
+          MyHomeDialog(context);
+        },
+        color: Colors.purpleAccent,
+        child: Text(
+          'CheckAlert',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+          ),
+        ),
       ),
     );
   }
@@ -92,8 +102,12 @@ class Settings extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Container(
-        child: Text('This is Settings Page'),
+      child: RaisedButton(
+        onPressed: () {
+          AlertDialogWithTextField(context);
+        },
+        color: Colors.purple,
+        child: Text('AlertDialogWithTextField'),
       ),
     );
   }
@@ -103,9 +117,101 @@ class Videos extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Container(
-        child: Text('This is Videos Library'),
+      child: FlatButton(
+        onPressed: () {
+          MultipleSelection(context);
+        },
+        child: Text('Select One'),
+        color: Colors.purple,
       ),
     );
   }
+}
+
+MyHomeDialog(BuildContext context) {
+  //BsicAlertDialog
+  showDialog(
+      barrierDismissible: false,
+      context: context,
+      builder: (_) {
+        return AlertDialog(
+          //backgroundColor: Colors.deepPurple,
+          title: Text('Warning'),
+          content: Text('This is a try to AlertDialog Widget'),
+          actions: [
+            FlatButton(
+              onPressed: () {
+                Navigator.pop(context, false);
+              },
+              child: Text('Cancel'),
+              color: Colors.purple,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10)),
+            ),
+          ],
+        );
+      });
+}
+
+AlertDialogWithTextField(BuildContext context) {
+  showDialog(
+      barrierDismissible: false,
+      context: context,
+      builder: (_) {
+        return AlertDialog(
+          title: Text('TextField'),
+          content: TextFormField(
+            obscureText: false,
+            decoration: InputDecoration(
+              hintText: 'Enter your Name',
+            ),
+          ),
+          actions: [
+            FlatButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text('Cancel'),
+            ),
+          ],
+        );
+      });
+}
+
+MultipleSelection(BuildContext context) {
+  showDialog(
+      barrierDismissible: true,
+      context: context,
+      builder: (_) {
+        return SimpleDialog(
+          title: Text('Select One'),
+          children: [
+            SimpleDialogOption(
+              child: Text('BirthDay'),
+              onPressed: () {},
+            ),
+            SizedBox(
+              height: 6,
+            ),
+            SimpleDialogOption(
+              child: Text('Anniversary'),
+              onPressed: () {},
+            ),
+            SizedBox(
+              height: 6,
+            ),
+            SimpleDialogOption(
+              child: Text('Congratulations'),
+              onPressed: () {},
+            ),
+            SizedBox(
+              height: 6,
+            ),
+            SimpleDialogOption(
+              child: Text('Wedding'),
+              onPressed: () {},
+            ),
+          ],
+        );
+      });
 }
