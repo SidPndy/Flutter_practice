@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+//import 'package:flutter/services.dart';
 import 'Sports.dart';
 import 'Home.dart';
 import 'Settings.dart';
@@ -20,9 +21,10 @@ class MyApp extends StatelessWidget {
           appBar: AppBar(
             title: Center(child: Text('MyApplictionDrawer')),
             backgroundColor: Colors.purple[900],
+            brightness: Brightness.dark,
             bottom: TabBar(
               unselectedLabelColor: Colors.white70,
-              isScrollable: false,
+              isScrollable: true,
               tabs: [
                 Tab(
                   text: 'Home',
@@ -48,34 +50,40 @@ class MyApp extends StatelessWidget {
             ),
           ),
           drawer: Drawer(
-            child: ListView(
-              children: [
-                UserAccountsDrawerHeader(
-                  accountName: Text('Siddhartha Pandey'),
-                  accountEmail: Text('siddharthapandey364@gmail.com'),
-                  decoration: BoxDecoration(
-                    color: Colors.purple[900],
+            child: Container(
+              child: ListView(
+                children: [
+                  UserAccountsDrawerHeader(
+                    accountName: Text('Siddhartha Pandey'),
+                    accountEmail: Text('siddharthapandey364@gmail.com'),
+                    decoration: BoxDecoration(
+                      color: Colors.purple[900],
+                    ),
+                    currentAccountPicture: CircleAvatar(
+                      backgroundImage: AssetImage('assets/Pic.PNG'),
+                    ),
                   ),
-                  currentAccountPicture: CircleAvatar(
-                    backgroundImage: AssetImage('assets/Pic.PNG'),
+                  ListTile(
+                    leading: Icon(Icons.home),
+                    title: Text('Home'),
+                    onTap: () {},
                   ),
-                ),
-                ListTile(
-                  leading: Icon(Icons.home),
-                  title: Text('Home'),
-                  onTap: () {},
-                ),
-                ListTile(
-                  leading: Icon(Icons.video_library),
-                  title: Text('Videos'),
-                  onTap: () {},
-                ),
-                ListTile(
-                  leading: Icon(Icons.settings),
-                  title: Text('Settings'),
-                  onTap: () {},
-                ),
-              ],
+                  Divider(
+                    height: 10,
+                    color: Colors.grey,
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.video_library),
+                    title: Text('Videos'),
+                    onTap: () {},
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.settings),
+                    title: Text('Settings'),
+                    onTap: () {},
+                  ),
+                ],
+              ),
             ),
           ),
           body: TabBarView(children: [
