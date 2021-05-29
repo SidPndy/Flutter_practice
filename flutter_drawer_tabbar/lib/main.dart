@@ -1,5 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'Sports.dart';
+import 'Home.dart';
+import 'Settings.dart';
+import 'Videos.dart';
+import 'LongList.dart';
 
 void main() {
   runApp(MyApp());
@@ -11,7 +15,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'MyApplication',
       home: DefaultTabController(
-        length: 3,
+        length: 5,
         child: Scaffold(
           appBar: AppBar(
             title: Center(child: Text('MyApplictionDrawer')),
@@ -31,6 +35,14 @@ class MyApp extends StatelessWidget {
                 Tab(
                   text: 'Settings',
                   icon: Icon(Icons.settings),
+                ),
+                Tab(
+                  text: 'Sports',
+                  icon: Icon(Icons.sports),
+                ),
+                Tab(
+                  text: 'Long List',
+                  icon: Icon(Icons.list),
                 ),
               ],
             ),
@@ -70,148 +82,11 @@ class MyApp extends StatelessWidget {
             Home(),
             Videos(),
             Settings(),
+            Sports(),
+            LongList(),
           ]),
         ),
       ),
     );
   }
-}
-
-class Home extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: RaisedButton(
-        onPressed: () {
-          MyHomeDialog(context);
-        },
-        color: Colors.purpleAccent,
-        child: Text(
-          'CheckAlert',
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            color: Colors.white,
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class Settings extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: RaisedButton(
-        onPressed: () {
-          AlertDialogWithTextField(context);
-        },
-        color: Colors.purple,
-        child: Text('AlertDialogWithTextField'),
-      ),
-    );
-  }
-}
-
-class Videos extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: FlatButton(
-        onPressed: () {
-          MultipleSelection(context);
-        },
-        child: Text('Select One'),
-        color: Colors.purple,
-      ),
-    );
-  }
-}
-
-MyHomeDialog(BuildContext context) {
-  //BsicAlertDialog
-  showDialog(
-      barrierDismissible: false,
-      context: context,
-      builder: (_) {
-        return AlertDialog(
-          //backgroundColor: Colors.deepPurple,
-          title: Text('Warning'),
-          content: Text('This is a try to AlertDialog Widget'),
-          actions: [
-            FlatButton(
-              onPressed: () {
-                Navigator.pop(context, false);
-              },
-              child: Text('Cancel'),
-              color: Colors.purple,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10)),
-            ),
-          ],
-        );
-      });
-}
-
-AlertDialogWithTextField(BuildContext context) {
-  showDialog(
-      barrierDismissible: false,
-      context: context,
-      builder: (_) {
-        return AlertDialog(
-          title: Text('TextField'),
-          content: TextFormField(
-            obscureText: false,
-            decoration: InputDecoration(
-              hintText: 'Enter your Name',
-            ),
-          ),
-          actions: [
-            FlatButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: Text('Cancel'),
-            ),
-          ],
-        );
-      });
-}
-
-MultipleSelection(BuildContext context) {
-  showDialog(
-      barrierDismissible: true,
-      context: context,
-      builder: (_) {
-        return SimpleDialog(
-          title: Text('Select One'),
-          children: [
-            SimpleDialogOption(
-              child: Text('BirthDay'),
-              onPressed: () {},
-            ),
-            SizedBox(
-              height: 6,
-            ),
-            SimpleDialogOption(
-              child: Text('Anniversary'),
-              onPressed: () {},
-            ),
-            SizedBox(
-              height: 6,
-            ),
-            SimpleDialogOption(
-              child: Text('Congratulations'),
-              onPressed: () {},
-            ),
-            SizedBox(
-              height: 6,
-            ),
-            SimpleDialogOption(
-              child: Text('Wedding'),
-              onPressed: () {},
-            ),
-          ],
-        );
-      });
 }
