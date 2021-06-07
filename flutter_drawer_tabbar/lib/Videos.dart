@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_drawer_tabbar/Sports.dart';
+import 'Sports.dart';
 
 class Videos extends StatelessWidget {
+  final String wishes;
+  const Videos({this.wishes});
   @override
   Widget build(BuildContext context) {
     return Center(
       child: FlatButton(
         onPressed: () {
-          MultipleSelection(context);
+          multipleSelection(context);
         },
         child: Text('Select One'),
         color: Colors.purple,
@@ -15,7 +19,7 @@ class Videos extends StatelessWidget {
   }
 }
 
-MultipleSelection(BuildContext context) {
+multipleSelection(BuildContext context) {
   showDialog(
       barrierDismissible: true,
       context: context,

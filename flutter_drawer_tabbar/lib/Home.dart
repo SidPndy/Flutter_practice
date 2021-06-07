@@ -6,7 +6,7 @@ class Home extends StatelessWidget {
     return Center(
       child: RaisedButton(
         onPressed: () {
-          MyHomeDialog(context);
+          myHomeDialog(context);
         },
         color: Colors.purpleAccent,
         child: Text(
@@ -21,7 +21,7 @@ class Home extends StatelessWidget {
   }
 }
 
-MyHomeDialog(BuildContext context) {
+myHomeDialog(BuildContext context) {
   //BsicAlertDialog
   showDialog(
       barrierDismissible: false,
