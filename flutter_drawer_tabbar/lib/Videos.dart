@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_drawer_tabbar/Sports.dart';
-import 'Sports.dart';
 
 class Videos extends StatelessWidget {
   final String wishes;
