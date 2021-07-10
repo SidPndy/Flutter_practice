@@ -1,18 +1,37 @@
 import 'package:flutter/material.dart';
-import 'package:learning_ui_and_provider/ItemLists.dart';
+import 'package:provider/provider.dart';
+import 'LoginPage.dart';
+import 'myModel.dart';
+import 'addContact.dart';
 
 void main() {
-  runApp(MaterialApp(
-    home: MyApp(),
-  ));
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider<MyModel>(
+          create: (context) => MyModel(),
+        ),
+        ChangeNotifierProvider<AddItemModel>(create: (_) => AddItemModel()),
+      ],
+      child: MaterialApp(
+        initialRoute: '/',
+        routes: {
+          '/': (context) => Login(),
+          '/home': (context) => MyApp(),
+        },
+      ),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
+  static List userList = [];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Center(child: Text('Flutter')),
+        title: Text('Flutter'),
         backgroundColor: Colors.blue[900],
         elevation: 0,
       ),
@@ -27,8 +46,6 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  final user = 'Siddhartha Pandey';
-  final List userList = [];
   //  int counter = 0;
 
   // onclk() {
@@ -39,16 +56,20 @@ class _HomeState extends State<Home> {
   // }
 
   items(BuildContext context) {
-    return ListView.builder(
-        itemCount: userList.length,
-        itemBuilder: (context, index) {
-          return Card(
-            key: ValueKey(userList),
-            child: ListTile(
-              leading: Text(userList[index]),
-            ),
-          );
-        });
+    return Consumer<AddItemModel>(
+      builder: (context, value, child) => ListView.builder(
+          itemCount: AddContact.userList.length,
+          itemBuilder: (context, index) {
+            return Card(
+              key: ValueKey(value.contactName),
+              child: ListTile(
+                onTap: () {},
+                leading: Text(AddContact.nameofUser.text),
+                subtitle: Text(value.contactNum.text),
+              ),
+            );
+          }),
+    );
   }
 
   @override
@@ -68,16 +89,20 @@ class _HomeState extends State<Home> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    CircleAvatar(
-                      child: Text(user.substring(0, 1)),
+                    Consumer<MyModel>(
+                      builder: (context, value, child) => CircleAvatar(
+                        child: Text(value.name.text.substring(0, 1)),
+                      ),
                     ),
                     SizedBox(width: 13),
-                    Text(
-                      user,
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 30,
-                        color: Colors.white,
+                    Consumer<MyModel>(
+                      builder: (context, value, child) => Text(
+                        value.name.text,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 30,
+                          color: Colors.white,
+                        ),
                       ),
                     ),
                   ],
@@ -116,11 +141,19 @@ class _HomeState extends State<Home> {
           Positioned(
             bottom: 15,
             right: 8,
-            child: FloatingActionButton(
-              backgroundColor: Colors.blue[900],
-              onPressed: () => Navigator.push(
-                  context, MaterialPageRoute(builder: (_) => Items())),
-              child: Icon(Icons.add),
+            child: Consumer<AddItemModel>(
+              builder: (context, value, child) => FloatingActionButton(
+                backgroundColor: Colors.blue[900],
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => Items(),
+                    ),
+                  );
+                },
+                child: Icon(Icons.add),
+              ),
             ),
           ),
         ],
