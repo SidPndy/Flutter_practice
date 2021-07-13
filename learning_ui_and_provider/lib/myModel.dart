@@ -1,44 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:learning_ui_and_provider/LoginPage.dart';
 
+import 'LoginPage.dart';
 import 'addContact.dart';
 
 class MyModel extends ChangeNotifier {
   var name = MyBox.user;
+  var nam = AddContact.nameofUser;
+  var number = AddContact.contactofUser;
+
+  onClickSave(usernam, contc) {
+    nam = usernam;
+    number = contc;
+    AddContact.userList.add(usernam);
+    notifyListeners();
+  }
 
   onclklgn(nam) {
     name = nam;
     notifyListeners();
-  }
-}
-
-class AddItemModel extends ChangeNotifier {
-  var modelClass = AddContact();
-
-  var itemCol = AddContact.col;
-  var contactName = AddContact.nameofUser;
-  var contactNum = AddContact.contactofUser;
-  //var listofcontact = AddContact.userList;
-
-  onClickColor(Color itemColor) {
-    itemCol = itemColor;
-    notifyListeners();
-  }
-
-  onClickSavenam(nam) {
-    contactName = nam;
-    notifyListeners();
-  }
-
-  onClickSavenum(number) {
-    contactNum = number;
-    notifyListeners();
-  }
-
-  additemonsave(value) {
-    AddContact.userList.add(onClickSavenam(contactName));
-    // contactName.clear();
-    // contactNum.clear();
   }
 }
 

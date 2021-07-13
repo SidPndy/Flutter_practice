@@ -33,34 +33,36 @@ class _ItemsState extends State<Items> {
 //   }
 // }
 
-class AddContact extends StatelessWidget {
-  static var nameofUser = TextEditingController();
-  static var contactofUser = TextEditingController();
-  static Color? col;
+class Contacts {
+  String? name;
+  String? number;
+  Contacts({this.name, this.number});
+}
+
+class AddContact extends StatefulWidget {
+  static TextEditingController nameofUser = TextEditingController();
+  static TextEditingController contactofUser = TextEditingController();
   static List userList = [];
 
+  @override
+  _AddContactState createState() => _AddContactState();
+}
+
+class _AddContactState extends State<AddContact> {
   set numbersetter(numbr) {
-    contactofUser = numbr;
+    AddContact.contactofUser = numbr;
   }
 
   get numbersetter {
-    return contactofUser;
+    return AddContact.contactofUser;
   }
 
   set namesetter(nam) {
-    nameofUser = nam;
+    AddContact.nameofUser = nam;
   }
 
   get namesetter {
-    return nameofUser;
-  }
-
-  List get listofusers {
-    return userList;
-  }
-
-  set listofusers(List listofusr) {
-    userList = listofusr;
+    return AddContact.nameofUser;
   }
 
   @override
@@ -79,7 +81,7 @@ class AddContact extends StatelessWidget {
             //   ),
             // ),
             TextFormField(
-              controller: nameofUser,
+              controller: AddContact.nameofUser,
               maxLength: 20,
               decoration: InputDecoration(
                 icon: Icon(Icons.person),
@@ -99,7 +101,8 @@ class AddContact extends StatelessWidget {
             // ),
             TextFormField(
               //maxLength: 20,
-              controller: contactofUser,
+
+              controller: AddContact.contactofUser,
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
                 icon: Icon(Icons.phone),
@@ -218,15 +221,13 @@ class AddContact extends StatelessWidget {
             ),
             SizedBox(height: 50),
             Center(
-              child: Consumer<AddItemModel>(
+              child: Consumer<MyModel>(
                 builder: (context, value, child) => ElevatedButton(
+                  child: Text('Save'),
                   onPressed: () {
                     Navigator.pop(context);
-                    value.onClickSavenam(value.contactName);
-                    value.onClickSavenum(value.contactNum);
-                    value.additemonsave(value);
+                    value.onClickSave(value.nam, value.number);
                   },
-                  child: Text('Save'),
                 ),
               ),
             ),

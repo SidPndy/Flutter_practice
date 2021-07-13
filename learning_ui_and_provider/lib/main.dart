@@ -11,7 +11,6 @@ void main() {
         ChangeNotifierProvider<MyModel>(
           create: (context) => MyModel(),
         ),
-        ChangeNotifierProvider<AddItemModel>(create: (_) => AddItemModel()),
       ],
       child: MaterialApp(
         initialRoute: '/',
@@ -54,21 +53,24 @@ class _HomeState extends State<Home> {
   //     counter++;
   //   });
   // }
+  List<Widget> addContactWidget = [];
 
   items(BuildContext context) {
-    return Consumer<AddItemModel>(
+    return Consumer<MyModel>(
       builder: (context, value, child) => ListView.builder(
-          itemCount: AddContact.userList.length,
-          itemBuilder: (context, index) {
-            return Card(
-              key: ValueKey(value.contactName),
-              child: ListTile(
+        itemCount: AddContact.userList.length,
+        itemBuilder: (context, index) {
+          return Card(
+            child: Consumer<MyModel>(
+              builder: (context, value, child) => ListTile(
                 onTap: () {},
-                leading: Text(AddContact.nameofUser.text),
-                subtitle: Text(value.contactNum.text),
+                leading: Text(value.nam.text),
+                subtitle: Text(value.number.text),
               ),
-            );
-          }),
+            ),
+          );
+        },
+      ),
     );
   }
 
@@ -141,19 +143,17 @@ class _HomeState extends State<Home> {
           Positioned(
             bottom: 15,
             right: 8,
-            child: Consumer<AddItemModel>(
-              builder: (context, value, child) => FloatingActionButton(
-                backgroundColor: Colors.blue[900],
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => Items(),
-                    ),
-                  );
-                },
-                child: Icon(Icons.add),
-              ),
+            child: FloatingActionButton(
+              backgroundColor: Colors.blue[900],
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => Items(),
+                  ),
+                );
+              },
+              child: Icon(Icons.add),
             ),
           ),
         ],
