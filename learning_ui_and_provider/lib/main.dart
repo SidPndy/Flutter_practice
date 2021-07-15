@@ -23,8 +23,23 @@ void main() {
   );
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   static List userList = [];
+
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  static int _index = 0;
+  static List navigatonTabs = [
+    AddedItemList(),
+    Items(),
+    Align(
+      child: Text('Comming soon............ '),
+      alignment: Alignment.center,
+    )
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +49,49 @@ class MyApp extends StatelessWidget {
         backgroundColor: Colors.blue[900],
         elevation: 0,
       ),
+      bottomNavigationBar: BottomNavigationBar(
+        onTap: (index) {
+          setState(() {
+            _index = index;
+          });
+        },
+        unselectedItemColor: Colors.white38,
+        currentIndex: _index,
+        backgroundColor: Colors.blue.shade900,
+        showUnselectedLabels: false,
+        selectedItemColor: Colors.white,
+        items: <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+              icon: Icon(Icons.contact_phone), label: 'My Contacts'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.favorite_outline), label: 'Favourite'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.call), label: 'Recent Calls'),
+        ],
+      ),
       body: Home(),
+    );
+  }
+}
+
+class AddedItemList extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Consumer<MyModel>(
+      builder: (context, value, child) => ListView.builder(
+        itemCount: AddContact.userList.length,
+        itemBuilder: (context, index) {
+          return Card(
+            child: Consumer<MyModel>(
+              builder: (context, value, child) => ListTile(
+                onTap: () {},
+                leading: Text(value.nam.text),
+                subtitle: Text(value.number.text),
+              ),
+            ),
+          );
+        },
+      ),
     );
   }
 }
@@ -53,26 +110,26 @@ class _HomeState extends State<Home> {
   //     counter++;
   //   });
   // }
-  List<Widget> addContactWidget = [];
+  // List<Widget> addContactWidget = [];
 
-  items(BuildContext context) {
-    return Consumer<MyModel>(
-      builder: (context, value, child) => ListView.builder(
-        itemCount: AddContact.userList.length,
-        itemBuilder: (context, index) {
-          return Card(
-            child: Consumer<MyModel>(
-              builder: (context, value, child) => ListTile(
-                onTap: () {},
-                leading: Text(value.nam.text),
-                subtitle: Text(value.number.text),
-              ),
-            ),
-          );
-        },
-      ),
-    );
-  }
+  // items(BuildContext context) {
+  //   return Consumer<MyModel>(
+  //     builder: (context, value, child) => ListView.builder(
+  //       itemCount: AddContact.userList.length,
+  //       itemBuilder: (context, index) {
+  //         return Card(
+  //           child: Consumer<MyModel>(
+  //             builder: (context, value, child) => ListTile(
+  //               onTap: () {},
+  //               leading: Text(value.nam.text),
+  //               subtitle: Text(value.number.text),
+  //             ),
+  //           ),
+  //         );
+  //       },
+  //     ),
+  //   );
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -137,25 +194,25 @@ class _HomeState extends State<Home> {
             child: Container(
               height: MediaQuery.of(context).size.height,
               width: MediaQuery.of(context).size.width / 1.2,
-              child: items(context),
+              child: _MyAppState.navigatonTabs[_MyAppState._index],
             ),
           ),
-          Positioned(
-            bottom: 15,
-            right: 8,
-            child: FloatingActionButton(
-              backgroundColor: Colors.blue[900],
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) => Items(),
-                  ),
-                );
-              },
-              child: Icon(Icons.add),
-            ),
-          ),
+          // Positioned(
+          //   bottom: 15,
+          //   right: 8,
+          //   child: FloatingActionButton(
+          //     backgroundColor: Colors.blue[900],
+          //     onPressed: () {
+          //       Navigator.push(
+          //         context,
+          //         MaterialPageRoute(
+          //           builder: (_) => Items(),
+          //         ),
+          //       );
+          //     },
+          //     child: Icon(Icons.add),
+          //   ),
+          // ),
         ],
       ),
     );

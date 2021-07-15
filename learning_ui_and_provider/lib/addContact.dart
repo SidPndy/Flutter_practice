@@ -11,9 +11,10 @@ class _ItemsState extends State<Items> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Add Item'),
-      ),
+      // appBar: AppBar(
+      //   title: Text('Add Item'),
+      // ),
+      backgroundColor: Colors.white,
       body: AddContact(),
     );
   }
@@ -225,8 +226,10 @@ class _AddContactState extends State<AddContact> {
                 builder: (context, value, child) => ElevatedButton(
                   child: Text('Save'),
                   onPressed: () {
-                    Navigator.pop(context);
+                    //Navigator.pop(context);
                     value.onClickSave(value.nam, value.number);
+                    ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text('Contact added to list')));
                   },
                 ),
               ),
