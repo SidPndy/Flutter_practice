@@ -11,7 +11,12 @@ class MyModel extends ChangeNotifier {
   onClickSave(usernam, contc) {
     nam = usernam;
     number = contc;
-    AddContact.userList.add(usernam);
+    if (nam == null || number == null) {
+      return null;
+    } else {
+      AddContact.userList.add(usernam);
+    }
+
     notifyListeners();
   }
 

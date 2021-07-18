@@ -41,8 +41,8 @@ class Contacts {
 }
 
 class AddContact extends StatefulWidget {
-  static TextEditingController nameofUser = TextEditingController();
-  static TextEditingController contactofUser = TextEditingController();
+  static TextEditingController? nameofUser = TextEditingController();
+  static TextEditingController? contactofUser = TextEditingController();
   static List userList = [];
 
   @override
@@ -50,25 +50,27 @@ class AddContact extends StatefulWidget {
 }
 
 class _AddContactState extends State<AddContact> {
-  set numbersetter(numbr) {
-    AddContact.contactofUser = numbr;
-  }
+  GlobalKey<FormState> _myFormKey = GlobalKey<FormState>();
+  // set numbersetter(numbr) {
+  //   AddContact.contactofUser = numbr;
+  // }
 
-  get numbersetter {
-    return AddContact.contactofUser;
-  }
+  // get numbersetter {
+  //   return AddContact.contactofUser;
+  // }
 
-  set namesetter(nam) {
-    AddContact.nameofUser = nam;
-  }
+  // set namesetter(nam) {
+  //   AddContact.nameofUser = nam;
+  // }
 
-  get namesetter {
-    return AddContact.nameofUser;
-  }
+  // get namesetter {
+  //   return AddContact.nameofUser;
+  // }
 
   @override
   Widget build(BuildContext context) {
     return Form(
+      key: _myFormKey,
       child: Padding(
         padding: const EdgeInsets.fromLTRB(15, 20, 10, 0),
         child: Column(
@@ -92,6 +94,12 @@ class _AddContactState extends State<AddContact> {
                 ),
                 hintText: 'Example: Ujjwal Bhandari',
               ),
+              validator: (value) {
+                if (value!.isEmpty) {
+                  return 'Please Enter name';
+                } else
+                  return null;
+              },
             ),
             // Text(
             //   'Contact',
@@ -112,6 +120,12 @@ class _AddContactState extends State<AddContact> {
                 ),
                 hintText: 'Example: 9812345678',
               ),
+              validator: (value) {
+                if (value!.isEmpty)
+                  return 'Please enter number';
+                else
+                  return null;
+              },
             ),
             SizedBox(height: 30),
             Padding(
@@ -226,10 +240,13 @@ class _AddContactState extends State<AddContact> {
                 builder: (context, value, child) => ElevatedButton(
                   child: Text('Save'),
                   onPressed: () {
-                    //Navigator.pop(context);
-                    value.onClickSave(value.nam, value.number);
-                    ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text('Contact added to list')));
+                    if (_myFormKey.currentState!.validate()) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text('Contact added!')));
+                      return value.onClickSave(value.nam, value.number);
+                    } else {
+                      return null;
+                    }
                   },
                 ),
               ),

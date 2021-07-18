@@ -63,8 +63,7 @@ class _MyAppState extends State<MyApp> {
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
               icon: Icon(Icons.contact_phone), label: 'My Contacts'),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.favorite_outline), label: 'Favourite'),
+          BottomNavigationBarItem(icon: Icon(Icons.add), label: 'Add Contact'),
           BottomNavigationBarItem(
               icon: Icon(Icons.call), label: 'Recent Calls'),
         ],
@@ -84,10 +83,13 @@ class AddedItemList extends StatelessWidget {
           return Card(
             child: Consumer<MyModel>(
               builder: (context, value, child) => ListTile(
-                onTap: () {},
-                leading: Text(value.nam.text),
-                subtitle: Text(value.number.text),
-              ),
+                  onTap: () {},
+                  leading: value.nam == null
+                      ? Text('Added null')
+                      : Text(value.nam!.text),
+                  subtitle: value.number == null
+                      ? Text('Added null')
+                      : Text(value.number!.text)),
             ),
           );
         },
@@ -191,10 +193,12 @@ class _HomeState extends State<Home> {
             top: 120,
             left: 30,
             right: 30,
-            child: Container(
-              height: MediaQuery.of(context).size.height,
-              width: MediaQuery.of(context).size.width / 1.2,
-              child: _MyAppState.navigatonTabs[_MyAppState._index],
+            child: SingleChildScrollView(
+              child: Container(
+                height: MediaQuery.of(context).size.height / 1.5,
+                width: MediaQuery.of(context).size.width / 1.2,
+                child: _MyAppState.navigatonTabs[_MyAppState._index],
+              ),
             ),
           ),
           // Positioned(
