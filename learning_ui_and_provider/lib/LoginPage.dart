@@ -12,7 +12,7 @@ class _LoginState extends State<Login> {
     return Scaffold(
       appBar: AppBar(
         title: Center(child: Text('Login')),
-        backgroundColor: Colors.blue[900],
+        backgroundColor: Colors.green[900],
       ),
       body: Form(
         key: formkey,
@@ -33,7 +33,7 @@ class _LoginState extends State<Login> {
                 }
               },
               label: Text('          Login         '),
-              backgroundColor: Colors.blue[900],
+              backgroundColor: Colors.green[900],
             ),
           ],
         ),
@@ -58,7 +58,7 @@ class MyBox extends StatelessWidget {
       maxLength: 20,
       decoration: InputDecoration(
         hintText: 'Enter your name',
-        enabledBorder: InputBorder.none,
+        border: UnderlineInputBorder(),
       ),
     );
   }

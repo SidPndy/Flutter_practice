@@ -1,24 +1,9 @@
 import 'package:flutter/material.dart';
 
 import 'LoginPage.dart';
-import 'addContact.dart';
 
 class MyModel extends ChangeNotifier {
   var name = MyBox.user;
-  var nam = AddContact.nameofUser;
-  var number = AddContact.contactofUser;
-
-  onClickSave(usernam, contc) {
-    nam = usernam;
-    number = contc;
-    if (nam == null || number == null) {
-      return null;
-    } else {
-      AddContact.userList.add(usernam);
-    }
-
-    notifyListeners();
-  }
 
   onclklgn(nam) {
     name = nam;

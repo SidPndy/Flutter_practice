@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:learning_ui_and_provider/CustomePainter.dart';
 import 'package:provider/provider.dart';
 import 'LoginPage.dart';
 import 'myModel.dart';
 import 'addContact.dart';
+import 'RecentCalls.dart';
 
 void main() {
   runApp(
@@ -13,10 +15,12 @@ void main() {
         ),
       ],
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         initialRoute: '/',
         routes: {
           '/': (context) => Login(),
           '/home': (context) => MyApp(),
+          '/customPainterPage': (context) => MyCustomPainterPage(),
         },
       ),
     ),
@@ -35,20 +39,17 @@ class _MyAppState extends State<MyApp> {
   static List navigatonTabs = [
     AddedItemList(),
     Items(),
-    Align(
-      child: Text('Comming soon............ '),
-      alignment: Alignment.center,
-    )
+    RecentCallsPage(),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Flutter'),
-        backgroundColor: Colors.blue[900],
-        elevation: 0,
-      ),
+      // appBar: AppBar(
+      //   title: Text('Flutter'),
+      //   backgroundColor: Colors.green[900],
+      //   elevation: 0,
+      // ),
       bottomNavigationBar: BottomNavigationBar(
         onTap: (index) {
           setState(() {
@@ -57,7 +58,7 @@ class _MyAppState extends State<MyApp> {
         },
         unselectedItemColor: Colors.white38,
         currentIndex: _index,
-        backgroundColor: Colors.blue.shade900,
+        backgroundColor: Colors.green.shade900,
         showUnselectedLabels: false,
         selectedItemColor: Colors.white,
         items: <BottomNavigationBarItem>[
@@ -76,24 +77,17 @@ class _MyAppState extends State<MyApp> {
 class AddedItemList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Consumer<MyModel>(
-      builder: (context, value, child) => ListView.builder(
-        itemCount: AddContact.userList.length,
-        itemBuilder: (context, index) {
-          return Card(
-            child: Consumer<MyModel>(
-              builder: (context, value, child) => ListTile(
-                  onTap: () {},
-                  leading: value.nam == null
-                      ? Text('Added null')
-                      : Text(value.nam!.text),
-                  subtitle: value.number == null
-                      ? Text('Added null')
-                      : Text(value.number!.text)),
-            ),
-          );
-        },
-      ),
+    return ListView.builder(
+      physics: BouncingScrollPhysics(),
+      itemCount: AddContact.name.length,
+      itemBuilder: (context, index) {
+        return Card(
+          child: ListTile(
+              onTap: () {},
+              leading: Text(AddContact.name[index]),
+              subtitle: Text(AddContact.number[index])),
+        );
+      },
     );
   }
 }
@@ -142,41 +136,58 @@ class _HomeState extends State<Home> {
         children: [
           Container(
             width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height / 5,
-            color: Colors.blue[900],
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Consumer<MyModel>(
-                      builder: (context, value, child) => CircleAvatar(
-                        child: Text(value.name.text.substring(0, 1)),
-                      ),
-                    ),
-                    SizedBox(width: 13),
-                    Consumer<MyModel>(
-                      builder: (context, value, child) => Text(
-                        value.name.text,
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 30,
-                          color: Colors.white,
+            height: MediaQuery.of(context).size.height,
+            color: Colors.green[900],
+            child: Padding(
+              padding: EdgeInsets.fromLTRB(0, 140, 0, 0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Consumer<MyModel>(
+                        builder: (context, value, child) => CircleAvatar(
+                          backgroundColor: Colors.green,
+                          child: Text(
+                            value.name.text.substring(0, 1),
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
                         ),
                       ),
-                    ),
-                  ],
-                ),
-                Divider(
-                  height: 20,
-                  color: Colors.grey,
-                ),
-              ],
+                      SizedBox(width: 13),
+                      Consumer<MyModel>(
+                        builder: (context, value, child) => Text(
+                          value.name.text,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 30,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                      SizedBox(width: 13),
+                      InkWell(
+                        child: Icon(
+                          Icons.format_paint,
+                          color: Colors.amber,
+                        ),
+                        onTap: () {
+                          Navigator.pushNamed(context, '/customPainterPage');
+                        },
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 20),
+                ],
+              ),
             ),
           ),
           Positioned(
-            top: 110,
+            top: 200,
             child: Container(
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height,
@@ -190,7 +201,7 @@ class _HomeState extends State<Home> {
             ),
           ),
           Positioned(
-            top: 120,
+            top: 205,
             left: 30,
             right: 30,
             child: SingleChildScrollView(

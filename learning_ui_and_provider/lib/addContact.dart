@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:learning_ui_and_provider/myModel.dart';
-import 'package:provider/provider.dart';
 
 class Items extends StatefulWidget {
   @override
@@ -34,16 +32,17 @@ class _ItemsState extends State<Items> {
 //   }
 // }
 
-class Contacts {
-  String? name;
-  String? number;
-  Contacts({this.name, this.number});
-}
+// class Contacts {
+//   String? name;
+//   String? number;
+//   Contacts({this.name, this.number});
+// }
 
 class AddContact extends StatefulWidget {
-  static TextEditingController? nameofUser = TextEditingController();
-  static TextEditingController? contactofUser = TextEditingController();
-  static List userList = [];
+  static String nameofUser = '';
+  static String contactofUser = '';
+  static List<String> name = <String>[];
+  static List<String> number = <String>[];
 
   @override
   _AddContactState createState() => _AddContactState();
@@ -51,6 +50,8 @@ class AddContact extends StatefulWidget {
 
 class _AddContactState extends State<AddContact> {
   GlobalKey<FormState> _myFormKey = GlobalKey<FormState>();
+  bool? oncePressed;
+
   // set numbersetter(numbr) {
   //   AddContact.contactofUser = numbr;
   // }
@@ -84,8 +85,10 @@ class _AddContactState extends State<AddContact> {
             //   ),
             // ),
             TextFormField(
-              controller: AddContact.nameofUser,
               maxLength: 20,
+              onChanged: (a) {
+                AddContact.nameofUser = a;
+              },
               decoration: InputDecoration(
                 icon: Icon(Icons.person),
                 focusColor: Colors.purple,
@@ -111,8 +114,10 @@ class _AddContactState extends State<AddContact> {
             TextFormField(
               //maxLength: 20,
 
-              controller: AddContact.contactofUser,
               keyboardType: TextInputType.number,
+              onChanged: (a) {
+                AddContact.contactofUser = a;
+              },
               decoration: InputDecoration(
                 icon: Icon(Icons.phone),
                 enabledBorder: UnderlineInputBorder(
@@ -136,8 +141,10 @@ class _AddContactState extends State<AddContact> {
                   InkWell(
                     highlightColor: Colors.grey,
                     onTap: () {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text('Colour set to yellow')));
+                      this.oncePressed = true;
+                      if (this.oncePressed == false)
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text('Colour set to yellow')));
                     },
                     child: Card(
                       child: Container(
@@ -236,19 +243,21 @@ class _AddContactState extends State<AddContact> {
             ),
             SizedBox(height: 50),
             Center(
-              child: Consumer<MyModel>(
-                builder: (context, value, child) => ElevatedButton(
-                  child: Text('Save'),
-                  onPressed: () {
-                    if (_myFormKey.currentState!.validate()) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text('Contact added!')));
-                      return value.onClickSave(value.nam, value.number);
-                    } else {
-                      return null;
-                    }
-                  },
+              child: RaisedButton(
+                color: Colors.green.shade900,
+                child: Text(
+                  'Save',
+                  style: TextStyle(color: Colors.white),
                 ),
+                onPressed: () {
+                  if (_myFormKey.currentState!.validate()) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text('Contact added!')));
+                    return getFormData();
+                  } else {
+                    return null;
+                  }
+                },
               ),
             ),
           ],
@@ -256,4 +265,9 @@ class _AddContactState extends State<AddContact> {
       ),
     );
   }
+}
+
+getFormData() {
+  AddContact.name.insert(0, AddContact.nameofUser);
+  AddContact.number.insert(0, AddContact.contactofUser);
 }
