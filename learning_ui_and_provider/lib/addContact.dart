@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+<<<<<<< HEAD
 import 'main.dart';
+=======
+>>>>>>> d7d9cf88935d7d78f7fe07d186c8663ea8f8aba2
 
 class Items extends StatefulWidget {
   @override
@@ -42,8 +45,13 @@ class _ItemsState extends State<Items> {
 class AddContact extends StatefulWidget {
   static String nameofUser = '';
   static String contactofUser = '';
+<<<<<<< HEAD
   static final List<String> name = <String>[];
   static final List<String> number = <String>[];
+=======
+  static List<String> name = <String>[];
+  static List<String> number = <String>[];
+>>>>>>> d7d9cf88935d7d78f7fe07d186c8663ea8f8aba2
 
   @override
   _AddContactState createState() => _AddContactState();
@@ -51,6 +59,7 @@ class AddContact extends StatefulWidget {
 
 class _AddContactState extends State<AddContact> {
   GlobalKey<FormState> _myFormKey = GlobalKey<FormState>();
+<<<<<<< HEAD
 
   getFormData() {
     AddContact.name.insert(0, AddContact.nameofUser);
@@ -72,6 +81,9 @@ class _AddContactState extends State<AddContact> {
       }
     }
   }
+=======
+  bool? oncePressed;
+>>>>>>> d7d9cf88935d7d78f7fe07d186c8663ea8f8aba2
 
   // set numbersetter(numbr) {
   //   AddContact.contactofUser = numbr;
@@ -118,10 +130,16 @@ class _AddContactState extends State<AddContact> {
                 ),
                 hintText: 'Example: Ujjwal Bhandari',
               ),
+<<<<<<< HEAD
               textInputAction: TextInputAction.next,
               validator: (value) {
                 if (value!.isEmpty) {
                   return '*Please Enter name';
+=======
+              validator: (value) {
+                if (value!.isEmpty) {
+                  return 'Please Enter name';
+>>>>>>> d7d9cf88935d7d78f7fe07d186c8663ea8f8aba2
                 } else
                   return null;
               },
@@ -140,8 +158,11 @@ class _AddContactState extends State<AddContact> {
               onChanged: (a) {
                 AddContact.contactofUser = a;
               },
+<<<<<<< HEAD
               // onFieldSubmitted: (nameofUser) => onFormSave(),
 
+=======
+>>>>>>> d7d9cf88935d7d78f7fe07d186c8663ea8f8aba2
               decoration: InputDecoration(
                 icon: Icon(Icons.phone),
                 enabledBorder: UnderlineInputBorder(
@@ -151,12 +172,17 @@ class _AddContactState extends State<AddContact> {
               ),
               validator: (value) {
                 if (value!.isEmpty)
+<<<<<<< HEAD
                   return '*Please enter number';
+=======
+                  return 'Please enter number';
+>>>>>>> d7d9cf88935d7d78f7fe07d186c8663ea8f8aba2
                 else
                   return null;
               },
             ),
             SizedBox(height: 30),
+<<<<<<< HEAD
             // Padding(
             //   padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
             //   child: Row(
@@ -265,6 +291,117 @@ class _AddContactState extends State<AddContact> {
             //   ),
             // ),
             //SizedBox(height: 50),
+=======
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  InkWell(
+                    highlightColor: Colors.grey,
+                    onTap: () {
+                      this.oncePressed = true;
+                      if (this.oncePressed == false)
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text('Colour set to yellow')));
+                    },
+                    child: Card(
+                      child: Container(
+                        height: 20,
+                        width: 20,
+                        decoration: BoxDecoration(
+                          color: Colors.amber,
+                        ),
+                      ),
+                    ),
+                  ),
+                  InkWell(
+                    highlightColor: Colors.grey,
+                    onTap: () {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text('Colour set to blue')));
+                    },
+                    child: Card(
+                      child: Container(
+                        height: 20,
+                        width: 20,
+                        decoration: BoxDecoration(
+                          color: Colors.blue,
+                        ),
+                      ),
+                    ),
+                  ),
+                  InkWell(
+                    highlightColor: Colors.grey,
+                    onTap: () {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text('Colour set to red')));
+                    },
+                    child: Card(
+                      child: Container(
+                        height: 20,
+                        width: 20,
+                        decoration: BoxDecoration(
+                          color: Colors.red,
+                        ),
+                      ),
+                    ),
+                  ),
+                  InkWell(
+                    highlightColor: Colors.grey,
+                    onTap: () {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text('Colour set to purple')));
+                    },
+                    child: Card(
+                      child: Container(
+                        height: 20,
+                        width: 20,
+                        decoration: BoxDecoration(
+                          color: Colors.purple,
+                        ),
+                      ),
+                    ),
+                  ),
+                  InkWell(
+                    onTap: () {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text('Colour set to cyan')));
+                    },
+                    highlightColor: Colors.grey,
+                    child: Card(
+                      child: Container(
+                        height: 20,
+                        width: 20,
+                        decoration: BoxDecoration(
+                          color: Colors.cyan,
+                        ),
+                      ),
+                    ),
+                  ),
+                  InkWell(
+                      onTap: () {
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          content: Text('Colour set to navy'),
+                          duration: Duration(seconds: 2),
+                        ));
+                      },
+                      //splashColor: Colors.white,
+                      highlightColor: Colors.grey,
+                      child: Card(
+                        child: Container(
+                          height: 20,
+                          width: 20,
+                          decoration: BoxDecoration(
+                            color: Colors.blue[900],
+                          ),
+                        ),
+                      )),
+                ],
+              ),
+            ),
+            SizedBox(height: 50),
+>>>>>>> d7d9cf88935d7d78f7fe07d186c8663ea8f8aba2
             Center(
               child: RaisedButton(
                 color: Colors.green.shade900,
@@ -272,7 +409,19 @@ class _AddContactState extends State<AddContact> {
                   'Save',
                   style: TextStyle(color: Colors.white),
                 ),
+<<<<<<< HEAD
                 onPressed: () => onFormSave(),
+=======
+                onPressed: () {
+                  if (_myFormKey.currentState!.validate()) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text('Contact added!')));
+                    return getFormData();
+                  } else {
+                    return null;
+                  }
+                },
+>>>>>>> d7d9cf88935d7d78f7fe07d186c8663ea8f8aba2
               ),
             ),
           ],
@@ -281,3 +430,11 @@ class _AddContactState extends State<AddContact> {
     );
   }
 }
+<<<<<<< HEAD
+=======
+
+getFormData() {
+  AddContact.name.insert(0, AddContact.nameofUser);
+  AddContact.number.insert(0, AddContact.contactofUser);
+}
+>>>>>>> d7d9cf88935d7d78f7fe07d186c8663ea8f8aba2

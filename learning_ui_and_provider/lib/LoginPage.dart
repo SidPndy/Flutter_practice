@@ -13,6 +13,7 @@ class _LoginState extends State<Login> {
       appBar: AppBar(
         title: Center(child: Text('Login')),
         backgroundColor: Colors.green[900],
+<<<<<<< HEAD
         actions: [
           Padding(
               padding: EdgeInsets.only(right: 10), child: Icon(Icons.dark_mode))
@@ -52,6 +53,31 @@ class _LoginState extends State<Login> {
               ),
             ],
           ),
+=======
+      ),
+      body: Form(
+        key: formkey,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+              child: MyBox(),
+            ),
+            SizedBox(height: 10),
+            FloatingActionButton.extended(
+              onPressed: () {
+                if (formkey.currentState!.validate()) {
+                  Navigator.pushNamed(context, '/home');
+                } else {
+                  return null;
+                }
+              },
+              label: Text('          Login         '),
+              backgroundColor: Colors.green[900],
+            ),
+          ],
+>>>>>>> d7d9cf88935d7d78f7fe07d186c8663ea8f8aba2
         ),
       ),
     );
@@ -66,7 +92,11 @@ class MyBox extends StatelessWidget {
     return TextFormField(
       validator: (value) {
         if (value == null || value.isEmpty) {
+<<<<<<< HEAD
           return '*Please enter your name';
+=======
+          return 'Please enter your name';
+>>>>>>> d7d9cf88935d7d78f7fe07d186c8663ea8f8aba2
         } else
           return null;
       },
